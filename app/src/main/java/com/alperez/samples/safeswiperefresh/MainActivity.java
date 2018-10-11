@@ -12,6 +12,7 @@ import com.alperez.samples.safeswiperefresh.widget.ListItemView;
 public class MainActivity extends AppCompatActivity {
 
     public static final int N_ITEMS = 12;
+    public static final int N_PAGES_IN_ITEM = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (convertView == null) {
-                    convertView = new ListItemView(parent.getContext(), parent);
+                    convertView = new ListItemView(MainActivity.this, parent, N_PAGES_IN_ITEM);
                 }
                 ((ListItemView) convertView).setTextData(getItem(position));
                 return convertView;

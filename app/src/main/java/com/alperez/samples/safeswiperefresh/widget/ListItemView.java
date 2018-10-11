@@ -1,25 +1,63 @@
 package com.alperez.samples.safeswiperefresh.widget;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.alperez.samples.safeswiperefresh.R;
+import com.alperez.widget.CirclePageIndicator;
 
 /**
  * Created by stanislav.perchenko on 10/11/2018
  */
 public class ListItemView extends FrameLayout {
 
+
     private String textData;
 
-    public ListItemView(@NonNull Context context, @Nullable ViewGroup parent) {
+    private ViewPager vPager;
+
+    public ListItemView(@NonNull AppCompatActivity context, @Nullable ViewGroup parent, int nPages) {
         super(context);
-        //TODO Inflate content
+        LayoutInflater.from(context).inflate(R.layout.view_list_item, parent, true);
+
+        (vPager = (ViewPager) findViewById(R.id.pager)).setAdapter(new MyAdapter(context.getSupportFragmentManager(), nPages));
+        ((CirclePageIndicator) findViewById(R.id.page_indicator)).setViewPager(vPager, nPages / 2);
     }
 
     public void setTextData(String textData) {
-        this.textData = textData;
-        //TODO Invalidate
+        if (!TextUtils.equals(this.textData, textData)) {
+            this.textData = textData;
+            vPager.getAdapter().notifyDataSetChanged();
+        }
+    }
+
+
+    /**********************************************************************************************/
+    /****************************  Adapter implementation  ****************************************/
+    /**********************************************************************************************/
+
+    private class MyAdapter extends FragmentPagerAdapter {
+        public MyAdapter(FragmentManager fm, int nPages) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
     }
 }
