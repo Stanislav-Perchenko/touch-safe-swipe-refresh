@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
+
+    <TextView android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_gravity="top|center_horizontal"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="#000"
+        android:textStyle="bold"
+        tools:text="Item: 5"/>
+
+    <android.support.v4.view.ViewPager android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="8dp" />
+
+    <com.alperez.widget.CirclePageIndicator android:id="@+id/page_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="24dp"
+        app:fillColor="#E85959"
+        app:pageColor="#A5A5A5"
+        app:strokeWidth="0dp" />
+
+</FrameLayout>
