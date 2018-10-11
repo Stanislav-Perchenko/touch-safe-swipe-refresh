@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.alperez.samples.safeswiperefresh.ItemPageFragment;
 import com.alperez.samples.safeswiperefresh.R;
 import com.alperez.widget.CirclePageIndicator;
 
@@ -46,18 +47,22 @@ public class ListItemView extends FrameLayout {
     /**********************************************************************************************/
 
     private class MyAdapter extends FragmentPagerAdapter {
+
+        private final int count;
+
         public MyAdapter(FragmentManager fm, int nPages) {
             super(fm);
+            count = nPages;
         }
 
         @Override
-        public Fragment getItem(int i) {
-            return null;
+        public Fragment getItem(int position) {
+            return ItemPageFragment.newInstance(position);
         }
 
         @Override
         public int getCount() {
-            return 0;
+            return count;
         }
     }
 }
