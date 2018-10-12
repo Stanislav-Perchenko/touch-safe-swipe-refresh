@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
-
+    <string name="app_name">SafeSwipeRefresh</string>
 
     <string name="item_page_content" formatted="false">Page #%d</string>
 </resources>

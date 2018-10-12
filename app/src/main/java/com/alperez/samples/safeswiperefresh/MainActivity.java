@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private static final boolean D = BuildConfig.DEBUG;
     public static final String LOG_TAG = "MY_ADAPTER";
 
-    public static final int N_ITEMS = 13;
-    public static final int N_PAGES_IN_ITEM = 9;
+    public static final int N_ITEMS = 24;
+    public static final int N_PAGES_IN_ITEM = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
