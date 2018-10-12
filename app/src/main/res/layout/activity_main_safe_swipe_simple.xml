@@ -13,7 +13,7 @@
         android:theme="@style/ToolbarTheme"
         style="@style/ToolbarStyle" />
 
-    <com.alperez.widget.TouchSafeSwipeRefreshLayout android:id="@+id/refresher"
+    <com.alperez.samples.safeswiperefresh.widget.CustomSwipeToRefresh android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -24,6 +24,6 @@
             android:divider="#959595"
             android:dividerHeight="1dp"/>
 
-    </com.alperez.widget.TouchSafeSwipeRefreshLayout>
+    </com.alperez.samples.safeswiperefresh.widget.CustomSwipeToRefresh>
 
 </LinearLayout>
