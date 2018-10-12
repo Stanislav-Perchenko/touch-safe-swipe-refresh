@@ -1,18 +1,14 @@
 package com.alperez.samples.safeswiperefresh.widget;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
-import com.alperez.samples.safeswiperefresh.ItemPageFragment;
+import com.alperez.samples.safeswiperefresh.MyItemAdapter;
 import com.alperez.samples.safeswiperefresh.R;
 import com.alperez.widget.CirclePageIndicator;
 
@@ -21,48 +17,26 @@ import com.alperez.widget.CirclePageIndicator;
  */
 public class ListItemView extends FrameLayout {
 
-
     private String textData;
 
+    private TextView vTxtTitle;
     private ViewPager vPager;
 
-    public ListItemView(@NonNull AppCompatActivity context, @Nullable ViewGroup parent, int nPages) {
+    public ListItemView(@NonNull Context context, int nPages) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.view_list_item, parent, true);
+        LayoutInflater.from(context).inflate(R.layout.view_list_item, this, true);
 
-        (vPager = (ViewPager) findViewById(R.id.pager)).setAdapter(new MyAdapter(context.getSupportFragmentManager(), nPages));
+        vTxtTitle = (TextView) findViewById(R.id.txt_title);
+        (vPager = (ViewPager) findViewById(R.id.pager)).setAdapter(new MyItemAdapter(nPages));
         ((CirclePageIndicator) findViewById(R.id.page_indicator)).setViewPager(vPager, nPages / 2);
     }
 
     public void setTextData(String textData) {
         if (!TextUtils.equals(this.textData, textData)) {
-            this.textData = textData;
+            vTxtTitle.setText(this.textData = textData);
+            ((MyItemAdapter) vPager.getAdapter()).setTextData(textData);
             vPager.getAdapter().notifyDataSetChanged();
         }
     }
 
-
-    /**********************************************************************************************/
-    /****************************  Adapter implementation  ****************************************/
-    /**********************************************************************************************/
-
-    private class MyAdapter extends FragmentPagerAdapter {
-
-        private final int count;
-
-        public MyAdapter(FragmentManager fm, int nPages) {
-            super(fm);
-            count = nPages;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return ItemPageFragment.newInstance(position);
-        }
-
-        @Override
-        public int getCount() {
-            return count;
-        }
-    }
 }

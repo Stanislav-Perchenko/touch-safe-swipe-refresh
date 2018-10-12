@@ -11,8 +11,8 @@ import com.alperez.samples.safeswiperefresh.widget.ListItemView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int N_ITEMS = 12;
-    public static final int N_PAGES_IN_ITEM = 5;
+    public static final int N_ITEMS = 13;
+    public static final int N_PAGES_IN_ITEM = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public String getItem(int i) {
-                return ""+i;
+                return "Item #"+i;
             }
 
             @Override
@@ -34,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 return i;
             }
 
+            private final int itemHeightPx = getResources().getDimensionPixelSize(R.dimen.list_item_height);
+
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 if (convertView == null) {
-                    convertView = new ListItemView(MainActivity.this, parent, N_PAGES_IN_ITEM);
+                    convertView = new ListItemView(MainActivity.this, N_PAGES_IN_ITEM);
+                    convertView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeightPx));
                 }
                 ((ListItemView) convertView).setTextData(getItem(position));
                 return convertView;
