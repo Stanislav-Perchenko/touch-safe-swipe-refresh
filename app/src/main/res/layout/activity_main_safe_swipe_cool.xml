@@ -13,7 +13,7 @@
         android:theme="@style/ToolbarTheme"
         style="@style/ToolbarStyle" />
 
-    <com.alperez.widget.TouchSafeSwipeRefreshLayout
+    <com.alperez.widget.TouchSafeSwipeRefreshLayout android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

@@ -2,6 +2,7 @@ package com.alperez.samples.safeswiperefresh;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.alperez.samples.safeswiperefresh.widget.ListItemView;
+import com.alperez.widget.TouchSafeSwipeRefreshLayout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(layoutResId);
         setupToolbar();
+        setupRefreshCanceler();
         ((ListView) findViewById(android.R.id.list)).setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -118,5 +121,31 @@ public class MainActivity extends AppCompatActivity {
     private String getTextArg(String argName) {
         String txt = getIntent().getStringExtra(argName);
         return (txt == null) ? "" : txt;
+    }
+
+
+
+    private void setupRefreshCanceler() {
+        View refresher = findViewById(R.id.refresher);
+        if (refresher == null) return;
+        if (refresher instanceof SwipeRefreshLayout) {
+            ((SwipeRefreshLayout) refresher).setOnRefreshListener(this::onRefreshStarted);
+        } else if (refresher instanceof TouchSafeSwipeRefreshLayout) {
+            ((TouchSafeSwipeRefreshLayout) refresher).setOnRefreshListener(this::onRefreshStarted);
+        }
+    }
+
+    private void onRefreshStarted() {
+        getWindow().getDecorView().postDelayed(this::dismissRefreshing, 1200);
+    }
+
+    private void dismissRefreshing() {
+        View refresher = findViewById(R.id.refresher);
+        if (refresher == null) return;
+        if (refresher instanceof SwipeRefreshLayout) {
+            ((SwipeRefreshLayout) refresher).setRefreshing(false);
+        } else if (refresher instanceof TouchSafeSwipeRefreshLayout) {
+            ((TouchSafeSwipeRefreshLayout) refresher).setRefreshing(false);
+        }
     }
 }

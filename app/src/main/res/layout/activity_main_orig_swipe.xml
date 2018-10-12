@@ -13,7 +13,7 @@
         android:theme="@style/ToolbarTheme"
         style="@style/ToolbarStyle" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/refresher"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
