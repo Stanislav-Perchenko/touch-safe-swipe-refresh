@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".LauncherActivity" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textAlignment="center"
+        android:layout_marginTop="48dp"
+        android:textColor="#000"
+        android:text="@string/project_description"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"/>
+
+
+    <LinearLayout android:id="@+id/opt_original_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="?attr/selectableItemBackground">
+        <TextView
+            style="@style/Text.LaunchOption.Title"
+            android:text="@string/screen_title_orig_swipe" />
+        <TextView
+            style="@style/Text.LaunchOption.Description"
+            android:text="@string/description_original_refresher"/>
+    </LinearLayout>
+
+
+    <LinearLayout android:id="@+id/opt_safe_swipe_simple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="?attr/selectableItemBackground" >
+        <TextView
+            style="@style/Text.LaunchOption.Title"
+            android:text="@string/screen_title_safe_swipe_simple" />
+        <TextView
+            style="@style/Text.LaunchOption.Description"
+            android:text="@string/description_safe_swipe_simple"/>
+    </LinearLayout>
+
+
+    <LinearLayout android:id="@+id/opt_safe_swipe_cool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="?attr/selectableItemBackground" >
+        <TextView
+            style="@style/Text.LaunchOption.Title"
+            android:text="@string/screen_title_safe_swipe_cool" />
+        <TextView
+            style="@style/Text.LaunchOption.Description"
+            android:text="@string/description_safe_swipe_cool"/>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"/>
+
+</LinearLayout>

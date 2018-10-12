@@ -1,12 +1,18 @@
 package com.alperez.samples.safeswiperefresh;
 
+import android.content.Intent;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alperez.samples.safeswiperefresh.widget.ListItemView;
 
@@ -18,13 +24,24 @@ public class MainActivity extends AppCompatActivity {
     private static final boolean D = BuildConfig.DEBUG;
     public static final String LOG_TAG = "MY_ADAPTER";
 
+    public static final String ARG_PAGE_LAYOUT = "page_layout";
+    public static final String ARG_PAGE_TITLE = "page_title";
+    public static final String ARG_PAGE_SUBTITLE = "page_subtitle";
+
     public static final int N_ITEMS = 24;
     public static final int N_PAGES_IN_ITEM = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        int layoutResId = getIntent().getIntExtra(ARG_PAGE_LAYOUT, -1);
+        if (layoutResId <= 0) {
+            Toast.makeText(this, String.format("No '%s' launch argument", ARG_PAGE_LAYOUT), Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        setContentView(layoutResId);
+        setupToolbar();
         ((ListView) findViewById(android.R.id.list)).setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -72,5 +89,34 @@ public class MainActivity extends AppCompatActivity {
                 return row;
             }
         });
+    }
+
+
+    protected void setupToolbar() {
+        ActionBar ab = getSupportActionBar();
+        if (ab == null) {
+            setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+            ab = getSupportActionBar();
+        }
+        if(ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+            ab.setTitle(getTextArg(ARG_PAGE_TITLE));
+            ab.setSubtitle(getTextArg(ARG_PAGE_SUBTITLE));
+        }
+
+        //--- This is the ugly hack to support setting title multiple times when the Toolbar
+        //--- is in the CollapsingToolbarLayout
+        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
+        if (tb != null) {
+            ViewParent vp = tb.getParent();
+            if ((vp != null) && (vp instanceof CollapsingToolbarLayout)) {
+                ((CollapsingToolbarLayout) vp).setTitle(getTextArg(ARG_PAGE_TITLE));
+            }
+        }
+    }
+
+    private String getTextArg(String argName) {
+        String txt = getIntent().getStringExtra(argName);
+        return (txt == null) ? "" : txt;
     }
 }

@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">SafeSwipeRefresh</string>
 
+    <string name="project_description">An example of the custom SwipeRefreshLayout which does not intercept horizontal swipe gesture. So ViewPager can be used as a part of list elements.</string>
+
+    <string name="screen_title_orig_swipe">Original Refresher</string>
+    <string name="screen_title_safe_swipe_simple">Simple safe Refresher</string>
+    <string name="screen_title_safe_swipe_cool">My safe Refresher</string>
+
+    <string name="description_original_refresher">This is the variant with the standard SwipeRefreshLayout from the support library</string>
+    <string name="description_safe_swipe_simple">This is the variant with the extended SwipeRefreshLayout (previous wide-spread Stack Overflow answers).</string>
+    <string name="description_safe_swipe_cool">This is my implementation of the swipe-to-refresh widget, which allows scrollable containers as a content (based on the support library code).</string>
+
     <string name="item_page_content" formatted="false">Page #%d</string>
 </resources>
