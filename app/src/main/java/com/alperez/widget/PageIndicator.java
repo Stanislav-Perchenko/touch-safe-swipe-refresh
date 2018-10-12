@@ -32,6 +32,17 @@ public interface PageIndicator extends ViewPager.OnPageChangeListener {
     void setCurrentItem(int item);
 
     /**
+     * <p>Set the current page of both the ViewPager and indicator.</p>
+     * <p>The ViewPager will perform no animation.</p>
+     *
+     * <p>This <strong>must</strong> be used if you need to set the page before
+     * the views are drawn on screen (e.g., default start page).</p>
+     *
+     * @param item
+     */
+    void setCurrentItemNoAnimation(int item);
+
+    /**
      * Set a page change listener which will receive forwarded events.
      *
      * @param listener

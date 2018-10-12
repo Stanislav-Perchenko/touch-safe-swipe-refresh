@@ -17,19 +17,40 @@ import com.alperez.widget.CirclePageIndicator;
  */
 public class ListItemView extends FrameLayout {
 
+    private final int nPages;
     private String textData;
+    private int positionInList;
 
     private TextView vTxtTitle;
     private ViewPager vPager;
+    private CirclePageIndicator vPageIndicator;
 
     public ListItemView(@NonNull Context context, int nPages) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.view_list_item, this, true);
 
         vTxtTitle = (TextView) findViewById(R.id.txt_title);
-        (vPager = (ViewPager) findViewById(R.id.pager)).setAdapter(new MyItemAdapter(nPages));
-        ((CirclePageIndicator) findViewById(R.id.page_indicator)).setViewPager(vPager, nPages / 2);
+        (vPager = (ViewPager) findViewById(R.id.pager)).setAdapter(new MyItemAdapter(this.nPages = nPages));
+        (vPageIndicator = (CirclePageIndicator) findViewById(R.id.page_indicator)).setViewPager(vPager, nPages / 2);
     }
+
+    public void setDefaultPagerPosition() {
+        vPageIndicator.setCurrentItemNoAnimation(nPages / 2);
+    }
+
+    public void setPagerPosition(int position) {
+        if (position < 0 || position >= nPages) {
+            throw new IllegalArgumentException("Wrong position value - "+position+", N pages = "+nPages);
+        } else {
+            vPageIndicator.setCurrentItemNoAnimation(position);
+        }
+    }
+
+    public int getPagerPosition() {
+        return vPager.getCurrentItem();
+    }
+
+
 
     public void setTextData(String textData) {
         if (!TextUtils.equals(this.textData, textData)) {
@@ -39,4 +60,11 @@ public class ListItemView extends FrameLayout {
         }
     }
 
+    public int getPositionInList() {
+        return positionInList;
+    }
+
+    public void setPositionInList(int positionInList) {
+        this.positionInList = positionInList;
+    }
 }
